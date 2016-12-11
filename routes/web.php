@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
 	return view('welcome');
 });
@@ -20,9 +19,9 @@ Route::get('/hello', function () {
 	echo 'hello word';
 });
 
-Route::get('/cache', function () {
-	
-});
+Route::get('/get/{name}/{id}', function ($name = 'James', $id) {
+	return view('greeting', ['name' => $name, 'id' => $id]);
+})->where(['name' => '[A-Za-z]+', 'id' => '[0-9]+']);
 
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('add/', 'AdminController@add');
@@ -35,6 +34,14 @@ Route::group(['prefix' => 'admin'], function () {
 	});
 	Route::get('route', function () {
 		return response('hello word', 200)
-			->header('Content-Type','text/plain');
+			->header('Content-Type', 'text/plain');
 	});
+	Route::get('showuser', 'AdminController@showuser');
+});
+
+Route::group(['prefix' => 'student'], function () {
+	Route::get('list/', 'StudentController@list');
+	Route::get('add/{name}/{age}/{sex}', 'StudentController@add');
+	Route::get('update/{name}/{age}/{sex}/{id}', 'StudentController@update');
+	Route::get('delete/{id}', 'StudentController@delete');
 });

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 //use App\Http\Controllers\Controller;
+use App\model\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Debug\Dumper;
 
@@ -49,5 +50,10 @@ class AdminController extends Controller
 			'username' => 'required|min:5|max:225',
 			'password' => 'required|min:6|max:225',
 		]);
+	}
+	
+	public function showuser()
+	{
+		return Admin::getUser();
 	}
 }
