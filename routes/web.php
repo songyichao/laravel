@@ -38,10 +38,17 @@ Route::group(['prefix' => 'admin'], function () {
 	});
 	Route::get('showuser', 'AdminController@showuser');
 });
-
+//学生
 Route::group(['prefix' => 'student'], function () {
 	Route::get('list/', 'StudentController@list');
 	Route::get('add/{name}/{age}/{sex}', 'StudentController@add');
 	Route::get('update/{name}/{age}/{sex}/{id}', 'StudentController@update');
 	Route::get('delete/{id}', 'StudentController@delete');
+});
+//教师
+Route::group(['prefix' => 'teacher'], function () {
+	Route::get('list/', 'TeacherController@list');
+	Route::get('add/{name}/{age}/{class}', 'TeacherController@add');
+	Route::get('update/{name}/{age}/{class}/{id}', 'TeacherController@update');
+	Route::get('delete/{id}', 'TeacherController@delete');
 });
