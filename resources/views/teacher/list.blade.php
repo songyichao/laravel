@@ -21,4 +21,35 @@
     <p>@{{ $name }}</p>
     {{--引入自视图--}}
     @include('teacher.common', ['message' => 'what'])
+    <!--流程控制 -->
+    {{--if--}}
+    @if($name === 'syc')
+        i am syc
+    @elseif($name === 'lgc')
+        i am lgc
+    @else
+        i???
+    @endif
+    {{--unless if 的取反--}}
+    @unless($name === 'syc1')
+        I am syc
+    @endunless
+    {{--for--}}
+    <p>@for($i = 0;$i<10;$i++)
+            {{$i}}
+        @endfor</p>
+    {{--foreach--}}
+    @foreach($list as $item)
+        {{$item->name}}
+    @endforeach
+    {{--forelse--}}
+    @forelse($list as $item)
+        {{$item->name}}
+    @empty
+        null
+    @endforelse
+    <!--url -->
+    <a href="{{url('teacher/list')}}"> url</a>
+    <a href="{{action('TeacherController@list')}}"> url</a>
+    <a href="{{url('list')}}"> url</a>
 @stop

@@ -17,7 +17,7 @@ class TeacherController extends Controller
 	public function list()
 	{
 		$list = (new Teacher())->list();
-		return view('teacher.list', ['list' => $list]);
+		return view('teacher.list', ['list' => $list, 'name' => 'syc']);
 //	 	dd($list->created_at);
 	}
 	 
