@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 //中间件
 Route::get('activity0', ['uses' => 'AdminController@activity0']);
+Route::get('date', ['uses' => 'AdminController@date']);
 Route::group(['middleware' => ['activity']], function () {
 	Route::get('activity1', ['uses' => 'AdminController@activity1']);
 	Route::get('activity2', ['uses' => 'AdminController@activity2']);
@@ -74,11 +75,12 @@ Route::group(['prefix' => 'people'], function () {
 	Route::any('delete/{id}', ['uses' => 'PeopleController@delete']);
 	
 });
-Route::any('upload',['uses' => 'UploadsController@upload']);
-Route::any('mail',['uses' => 'UploadsController@mail']);
-Route::any('cache1',['uses' => 'UploadsController@cache1']);
-Route::any('cache2',['uses' => 'UploadsController@cache2']);
-Route::any('error',['uses' => 'UploadsController@error']);
+Route::any('upload', ['uses' => 'UploadsController@upload']);
+Route::any('mail', ['uses' => 'UploadsController@mail']);
+Route::any('cache1', ['uses' => 'UploadsController@cache1']);
+Route::any('cache2', ['uses' => 'UploadsController@cache2']);
+Route::any('error', ['uses' => 'UploadsController@error']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/word', ['uses' => 'UploadsController@word']);

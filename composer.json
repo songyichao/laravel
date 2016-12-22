@@ -9,7 +9,8 @@
         "laravel/framework": "5.3.*",
         "raulfraile/ladybug": "^1.0",
         "barryvdh/laravel-ide-helper": "^2.2",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "phpoffice/phpword": "v0.13.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

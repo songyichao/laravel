@@ -97,7 +97,7 @@ class AdminController extends Controller
 	 */
 	public function session2(Request $request)
 	{
-		return Session::get('mess','no');
+		return Session::get('mess', 'no');
 		echo $request->session()->get('key1');
 		echo session()->get('key2');
 		echo Session::get('key3');
@@ -131,9 +131,9 @@ class AdminController extends Controller
 		//重定向
 		//		return redirect('admin/session2')->with('mess', 'super');
 		//action
-//		return redirect()->action('AdminController@session2')->with('mess', 'who');
+		//		return redirect()->action('AdminController@session2')->with('mess', 'who');
 		//route()
-//		return redirect()->route('session2')->with('mess', 'who');
+		//		return redirect()->route('session2')->with('mess', 'who');
 		return redirect()->back();
 	}
 	
@@ -150,5 +150,31 @@ class AdminController extends Controller
 	public function activity2()
 	{
 		return '活动进行中，谢谢参与';
+	}
+	
+	public function date()
+	{
+		$date = ['20161203', '20180303'];
+		$year_start = substr(reset($date), 0, 4);
+		$month_start = substr(reset($date), 4, 2);
+		$year_end = substr(end($date), 0, 4);
+		for ($year = $year_start; $year <= $year_end; $year++) {
+			for ($month = $month_start;
+			($month <= 12 && $year . $month < substr(end($date), 0, 6));
+			     $month++) {
+				$month = sprintf("%02d", $month);
+				if ($month >= 12) {
+					$month_start = 1;
+				}
+				if ($year . $month > substr(end($date), 0, 6)) {
+					break;
+				}
+				$col[] = [
+					'year' => intval($year),
+					'month' => intval($month),
+				];
+			}
+		}
+		dd($col);
 	}
 }

@@ -23,9 +23,10 @@ class Student extends Model
 		//		return DB::table('student')
 		//			->orderBy('id', 'desc')
 		//			->first();
-		//		return DB::table('student')
-		//			->whereRaw('id > ? and age = ?', [2, 11])
-		//			->get();
+		return DB::table('student')
+			->where([['id', 'in', '(12,13,14,4,5,6,7,8)']])
+			->tosql();
+			
 		//		return DB::table('student')
 		//			->whereRaw('id > ? and sex = ?', [2, 'nv'])
 		//			->pluck('name');
