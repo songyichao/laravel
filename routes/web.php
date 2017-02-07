@@ -11,6 +11,8 @@
 |
 */
 
+use app\Http\Controllers\TenxunyunController;
+
 Route::get('/', function () {
 	return view('welcome');
 });
@@ -84,3 +86,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/word', ['uses' => 'UploadsController@word']);
+Route::get('/yun', ['uses'=> 'TenxunyunController@account']);
+Route::get('/send', ['uses'=> 'TenxunyunController@send']);
+Route::get('/get-profile', ['uses'=> 'TenxunyunController@get_profile']);
