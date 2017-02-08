@@ -89,3 +89,10 @@ Route::get('/word', ['uses' => 'UploadsController@word']);
 Route::get('/yun', ['uses'=> 'TenxunyunController@account']);
 Route::get('/send', ['uses'=> 'TenxunyunController@send']);
 Route::get('/get-profile', ['uses'=> 'TenxunyunController@get_profile']);
+
+//collection
+Route::group(['prefix' => 'collection'], function () {
+	Route::get('collection1', 'CollectionController@collection1');
+	Route::get('collection2', 'CollectionController@collection2');
+	
+});
