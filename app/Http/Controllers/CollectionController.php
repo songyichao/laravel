@@ -44,11 +44,19 @@ class CollectionController
 	 */
 	public function collection2()
 	{
-		$collection = collect(['1' => 23, 'lis' => 'what', 'liuhd' => 'wuwuwu', 'www' => 'http']);
+		$collection = collect([
+			['name' => 'PHP: The Good Parts', 'pages' => 176],
+			['name' => 'PHP: The Definitive Guide', 'pages' => 1096],
+		]);
 		dump($collection);
 		//all() 返回集合的所代表的底层{数组}
 		dump($collection->all());
-		//avg() 返回集合中所有项目的平均值
-		dump($collection->avg());
+		//avg() 返回集合中所有项目的平均WE值
+		dump($collection->avg('pages'));
+		//将集合拆成多个指定大小的较小集合
+		$collection = collect([1, 2, 3, 3, 4, 5, 43, 3, 3233, 3, 1, 23, 4, 55, 1]);
+		dump($collection->chunk(2));
+		dump($collection->chunk(2)->toArray());
+		
 	}
 }
