@@ -94,5 +94,8 @@ Route::get('/get-profile', ['uses'=> 'TenxunyunController@get_profile']);
 Route::group(['prefix' => 'collection'], function () {
 	Route::get('collection1', 'CollectionController@collection1');
 	Route::get('collection2', 'CollectionController@collection2');
+	Route::get('collapse', 'CollectionController@collapse');
+	Route::get('combine', 'CollectionController@combine');
+	Route::get('contains', 'CollectionController@contains');
 	
 });

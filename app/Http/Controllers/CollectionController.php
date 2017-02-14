@@ -1,4 +1,5 @@
 <?php
+
 namespace app\Http\Controllers;
 
 
@@ -58,5 +59,41 @@ class CollectionController
 		dump($collection->chunk(2));
 		dump($collection->chunk(2)->toArray());
 		
+	}
+	
+	/**
+	 *将多个数组组成的集合合成单个一维数组集合：
+	 */
+	public function collapse()
+	{
+		$collection = collect([
+			['PHP: The Good Parts', 176],
+			['PHP: The Definitive Guide', 1096],
+		]);
+		
+		dump($collection);
+		
+		dump($collection->collapse());
+		
+		dump($collection);
+	}
+	
+	/**
+	 * combine() 将集合的值作为「键」，合并另一个数组或者集合作为「键」对应的值。
+	 */
+	public function combine()
+	{
+		$collection = collect(['name', 'age']);
+		$combined = $collection->combine(['syc', 25]);
+		dd($combined->all());
+	}
+	
+	public function contains()
+	{
+		$collection = collect(['name' => 'mac', 'price' => 101010]);
+		
+		dump($collection->contains('mac'));
+		
+		dump($collection->contains('win'));
 	}
 }
