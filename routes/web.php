@@ -97,5 +97,7 @@ Route::group(['prefix' => 'collection'], function () {
 	Route::get('collapse', 'CollectionController@collapse');
 	Route::get('combine', 'CollectionController@combine');
 	Route::get('contains', 'CollectionController@contains');
+	Route::get('diff', 'CollectionController@diff');
+	Route::get('except', 'CollectionController@except');
 	
 });
