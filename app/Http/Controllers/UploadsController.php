@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Log;
 use Illuminate\Http\Request;
-use Mail;
-use Cache;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -139,18 +136,8 @@ class UploadsController extends Controller
 		if (!is_dir($operate_dir)) {
 			@mkdir($operate_dir, 0777, true);
 		}
+		
 		$php_word = new PhpWord();
-		$properties = $php_word->getDocInfo();
-		$properties->setCreator('My name');
-		$properties->setCompany('My factory');
-		$properties->setTitle('My title');
-		$properties->setDescription('My description');
-		$properties->setCategory('My category');
-		$properties->setLastModifiedBy('My name');
-		$properties->setCreated(mktime(0, 0, 0, 3, 12, 2014));
-		$properties->setModified(mktime(0, 0, 0, 3, 14, 2014));
-		$properties->setSubject('My subject');
-		$properties->setKeywords('my, key, word');
 		$php_word->setDefaultFontName('微软雅黑');
 		$php_word->setDefaultFontSize(12);
 		$section = $php_word->addSection();
