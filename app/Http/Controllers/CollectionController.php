@@ -256,7 +256,24 @@ class CollectionController
 
         dump($collection->has('name'));
 
-        $collection = collect([]);
+        $collection = collect([
+            ['uid' => 'ashdajsdad', 'username' => 'sssss'],
+            ['uid' => '2222asdasd', 'username' => 'wwwww'],
+        ]);
+        //implode 类似于php的implode
+        dump($collection->implode('username', ','));
+
+        $collection = collect([1,3,2,4,567,6,8]);
+
+        dump($collection->implode('_'));
+
+        $collection = collect(['syc','wy','lgc']);
+        //intersect 计算交集
+        $intersect = $collection->intersect(['syc','lgc']);
+
+        dump($intersect->all());
+
+        dump($intersect->isEmpty());
 
     }
 
