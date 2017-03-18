@@ -294,10 +294,35 @@ class CollectionController
             return strtoupper($item['username']);
         });
         dump($keyed->all());
-
+        //keys() 返回所有的键
         dump($keyed->keys()->all());
-        
+
         dump($collection);
+
+        $last = $collection->last(function ($value, $key) {
+            return $value['uid'] === 'ashdajsdad';
+        });
+
+        dump($last);
+
+        $last_s = $collection->last();
+
+        dump($last_s);
+        //map()   对值做修改
+        $map = $collection->map(function ($item, $key) {
+            return $item['username'] . 'syc';
+        });
+
+        dump($map->all());
+        // mapWithKeys()  返回自定义键值对
+        $key_value = $collection->mapWithKeys(function ($item) {
+            return [$item['uid'] => $item['username']];
+        });
+
+        dump($key_value->all());
+
+        $max = $collection->max('uid');
+
     }
 
 
