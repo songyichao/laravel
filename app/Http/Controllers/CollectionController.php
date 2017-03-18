@@ -263,18 +263,41 @@ class CollectionController
         //implode 类似于php的implode
         dump($collection->implode('username', ','));
 
-        $collection = collect([1,3,2,4,567,6,8]);
+        $collection = collect([1, 3, 2, 4, 567, 6, 8]);
 
         dump($collection->implode('_'));
 
-        $collection = collect(['syc','wy','lgc']);
+        $collection = collect(['syc', 'wy', 'lgc']);
         //intersect 计算交集
-        $intersect = $collection->intersect(['syc','lgc']);
+        $intersect = $collection->intersect(['syc', 'lgc']);
 
         dump($intersect->all());
 
         dump($intersect->isEmpty());
 
+    }
+
+    public function key()
+    {
+        $collection = collect([
+            ['uid' => 'ashdajsdad', 'username' => 'sssss'],
+            ['uid' => '2222asdasd', 'username' => 'wwwww'],
+            ['uid' => 'ashdajsdad', 'username' => '22222211'],
+
+        ]);
+        //keyBy() 以指定键的值作为集合项目的键。如果几个数据项有相同的键，那在新集合中只显示最后一项
+        $key = $collection->keyBy('uid');
+
+        dump($key->all());
+
+        $keyed = $collection->keyBy(function ($item) {
+            return strtoupper($item['username']);
+        });
+        dump($keyed->all());
+
+        dump($keyed->keys()->all());
+        
+        dump($collection);
     }
 
 

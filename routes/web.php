@@ -101,5 +101,5 @@ Route::group(['prefix' => 'collection'], function () {
     Route::get('except', 'CollectionController@except');
     Route::get('flatMap', 'CollectionController@flatMap');
     Route::get('page', 'CollectionController@page');
-    
+    Route::get('key', 'CollectionController@key');
 });
