@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('session1', 'AdminController@session1');
     Route::get('session2', [
         'as' => 'session2',
-        'uses' => 'AdminController@session2'
+        'uses' => 'AdminController@session2',
     ]);
     Route::get('response', 'AdminController@response');
 });
@@ -75,7 +75,7 @@ Route::group(['prefix' => 'people'], function () {
     Route::any('update/{id}', ['uses' => 'PeopleController@update']);
     Route::get('show/{id}', ['uses' => 'PeopleController@show']);
     Route::any('delete/{id}', ['uses' => 'PeopleController@delete']);
-    
+
 });
 Route::any('upload', ['uses' => 'UploadsController@upload']);
 Route::any('mail', ['uses' => 'UploadsController@mail']);
@@ -89,6 +89,7 @@ Route::get('/word', ['uses' => 'UploadsController@word']);
 Route::get('/yun', ['uses' => 'TenxunyunController@account']);
 Route::get('/send', ['uses' => 'TenxunyunController@send']);
 Route::get('/get-profile', ['uses' => 'TenxunyunController@get_profile']);
+Route::get('/export', ['uses' => 'TestController@export']);
 
 //collection
 Route::group(['prefix' => 'collection'], function () {
@@ -102,4 +103,5 @@ Route::group(['prefix' => 'collection'], function () {
     Route::get('flatMap', 'CollectionController@flatMap');
     Route::get('page', 'CollectionController@page');
     Route::get('key', 'CollectionController@key');
+    Route::get('only', 'CollectionController@only');
 });

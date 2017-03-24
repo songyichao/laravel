@@ -323,6 +323,91 @@ class CollectionController
 
         $max = $collection->max('uid');
 
+        dump($max);
+
+        /*
+         *array:4 [▼
+         *    0 => array:2 [▶]
+         *    1 => array:2 [▶]
+         *    2 => array:2 [▶]
+         *    "php" => "most"
+         *  ]
+         */
+        $merge = $collection->merge(['php' => 'most']);
+
+        dump($merge->all());
+
+        $min = $collection->min('username');
+
+        dump($min);
+    }
+
+    public function only()
+    {
+        $collection = collect([
+            'name' => 'syc',
+            'sex' => 'man',
+            'age' => 12,
+        ]);
+        //only 返回指定键的值
+        $filtered = $collection->only('name', 'age');
+
+        dump($filtered->all());
+
+        //pipe 回调数据
+        $piped = $collection->pipe(function ($collection) {
+            return $collection->max();
+        });
+
+        dump($piped);
+
+        //pluck 多维数组
+        $pluck = $collection->pluck('name');
+
+        dump($pluck->all());
+        //pop 移除最后一个单元
+        dump($collection->pop());
+
+        dump($collection->all());
+        //prepend 新增一个键值作为第一个元素
+        dump($collection->prepend(20, 'age')->all());
+
+        //pull
+        dump($collection->pull('name'));
+
+        dump($collection->all());
+        //push 压入单元 最后一个单元
+        dump($collection->push('syc')->all());
+
+        //put 设置一个键值对
+        dump($collection->put('name', 'syc')->all());
+
+        //随机返回一个元素
+        dump($collection->random());
+        //方法将集合缩减到单个数值，该方法会将每次迭代的结果传入到下一次迭代：
+        $string = $collection->reduce(function ($carry, $item) {
+            return $carry . $item;
+        });
+        dump($string);
+
+        //移除通过测试的元素
+        $filtered = $collection->reject(function ($value) {
+            return $value === 'syc';
+        });
+        dump($filtered->all());
+
+        //按原顺序倒序排列集合
+        $reversed = collect([1, 2, 3, 6, 5, 4])->reverse();
+
+        dump($reversed->all());
+        //查找值返回键，查不到返回false
+        dump($collection->search('man'));
+
+        dump($collection->shift());
+
+        dump($collection->all());
+
+
     }
 
 
