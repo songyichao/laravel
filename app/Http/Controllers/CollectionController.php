@@ -402,11 +402,78 @@ class CollectionController
         dump($reversed->all());
         //查找值返回键，查不到返回false
         dump($collection->search('man'));
-
+        //移除第一个元素
         dump($collection->shift());
 
         dump($collection->all());
 
+        //打乱集合的顺序
+        dump(collect([1, 2, 3, 4, 5, 6, 7, 8, 9])->shuffle()->all());
+
+        //从指定索引分割集合
+        dump(collect([1, 2, 3, 4, 5, 6, 7, 8, 9])->slice(2, 6)->all());
+
+        dump(collect([1, 3, 2, 4, 9, 8, 6, 4, 6, 8])->sort()->all());
+
+        $collection = collect([
+            ['id' => 1, 'name' => 'syc'],
+            ['id' => 2, 'name' => 'abc'],
+            ['id' => 3, 'name' => 'sov'],
+            ['id' => 4, 'name' => 'ylc'],
+        ]);
+        //sortByDesc 逆序
+        $sorted = $collection->sortBy('id');
+        dump($sorted->all());
+
+        dump($collection->splice(2, 2, [['id' => 5, 'name' => 'nicia'],
+            ['id' => 6, 'name' => 'caimao'],]));
+
+        dump($collection->all());
+
+        //sum
+        dump(collect([1, 3, 4, 5, 5, 6,])->sum());
+
+        dump($collection->sum('id'));
+
+        dump(collect([1, 3, 4, 5, 5, 6, 7, 8, 9, 10])->take(2)->all());
+
+        $collect = collect([1, 3, 4, 5, 5, 6, 7, 8, 9, 10])->transform(function ($item) {
+            return $item * 100;
+        });
+
+        dump($collect->all());
+        //合并数组到集合，保留集合中的元素
+        dump(collect([1 => ['q'], 2 => ['a']])->union([3 => ['c'], 1 => ['g']])->all());
+        //去除重复的值，多维数组去除指定key的重复值 也可使用回调函数处理
+        //values 返回键连续的key
+        dump(collect([1, 2, 3, 2, 3, 1, 4, 55, 6, 7])->unique()->values()->all());
+
+        // 指定键值，过滤数据
+        $collection = collect([
+            ['product' => 'Desk', 'price' => 200],
+            ['product' => 'Chair', 'price' => 100],
+            ['product' => 'Bookcase', 'price' => 150],
+            ['product' => 'Door', 'price' => '100'],
+        ]);
+
+        $filtered = $collection->where('price', 100);
+
+        dump($filtered->all());
+        //whereStrict 和where一样的形式，但是会检查数据类型
+        $filtered = $collection->whereStrict('price', 100);
+
+        dump($filtered->all());
+
+        //whereIn
+        $filtered = $collection->whereIn('price', [100, 150]);
+
+        dump($filtered->all());
+        //zip
+        $collection = collect(['Chair', 'Desk']);
+
+        $zipped = $collection->zip([100, 200]);
+
+        $zipped->all();
 
     }
 
