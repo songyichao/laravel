@@ -11,8 +11,6 @@
 |
 */
 
-use app\Http\Controllers\TenxunyunController;
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -82,7 +80,6 @@ Route::any('mail', ['uses' => 'UploadsController@mail']);
 Route::any('cache1', ['uses' => 'UploadsController@cache1']);
 Route::any('cache2', ['uses' => 'UploadsController@cache2']);
 Route::any('error', ['uses' => 'UploadsController@error']);
-Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/word', ['uses' => 'UploadsController@word']);
@@ -90,6 +87,8 @@ Route::get('/yun', ['uses' => 'TenxunyunController@account']);
 Route::get('/send', ['uses' => 'TenxunyunController@send']);
 Route::get('/get-profile', ['uses' => 'TenxunyunController@get_profile']);
 Route::get('/export', ['uses' => 'TestController@export']);
+Route::get('/http', ['uses' => 'TestController@testHttp']);
+Route::get('/http2', ['uses' => 'TestController@testHttp2']);
 
 //collection
 Route::group(['prefix' => 'collection'], function () {
@@ -105,3 +104,9 @@ Route::group(['prefix' => 'collection'], function () {
     Route::get('key', 'CollectionController@key');
     Route::get('only', 'CollectionController@only');
 });
+
+//laravel test
+
+//Route::group(['prefix' => 'test'], function () {
+//    Route::get('test', 'test');
+//});

@@ -1,9 +1,10 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CollectionController
 {
@@ -11,13 +12,24 @@ class CollectionController
      * Illuminate\Support\Collection 类提供一个流畅、便利的封装来操控数组数据。
      * 如下面的示例代码，我们用 collect 函数从数组中创建新的集合实例，对每一个元素运行 strtoupper 函数，然后移除所有的空元素：
      */
-    public function create()
+    public function create(array $data)
     {
-        $collection = collect(['syc', 'xuz', null])->map(function ($name) {
+        $collection = collect($data)->map(function ($name) {
             return strtoupper($name);
         })->reject(function ($name) {
             return empty($name);
-        });
+        })->all();
+
+        return $collection;
+    }
+
+    public function validateLogin($uid, SessionInterface $session)
+    {
+        if ($uid === $session->get('uid')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -30,6 +42,7 @@ class CollectionController
      *      "www" => "2323"
      *       ]
      *   }
+     *
      * @param Request $request
      * 文档上有一句这样的话，"默认 Eloquent 模型的查询结果总是以 Collection 实例返回。"
      */

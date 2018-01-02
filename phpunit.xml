@@ -27,5 +27,11 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="BROWSER" value="chrome"/>
+        <env name="WEBSERVER_URL" value="www.baidu.com"/>
+        <env name="WEBSERVER_PORT" value="80"/>
+        <env name="SELENIUM_URL" value="localhost"/>
+        <env name="SELENIUM_PORT" value="4444"/>
+        <env name="AJAX_DELAY" value="1"/>
     </php>
 </phpunit>

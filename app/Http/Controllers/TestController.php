@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
+
 class TestController extends Controller
 {
 
@@ -31,36 +33,46 @@ class TestController extends Controller
 
     public function export()
     {
+        $a = 10;
 
-        $this->start();
-        echo '<h1>直接用php创建word文档</h1>
- 作者：axgle  
-<hr size=1>  
- <p>如果你打开data.doc，看到了这里的介绍，则说明word文档创建成功了。  
-<p>  
-不论是在什么操作系统下，使用本方法都可以直接用PHP生成word文档。绝对不是吹牛！  
-就算是没有安装word，也能够生成word文件。  
-当然了，生成的word文件可以用word,wps或者其他软件打开。  
-<p>  
-<b>使用方法：</b>  
-<br>  
-首先用$word->start()表示要生成word文件了。  
-然后你可以输出任何的HTML代码，不论是从文件读过来再写到这里，  
-还是直接在这里输出HTML，都没有关系。  
-  
-<p>等你输出完毕后，用$word->save($path)方法，其中$path是你想  
-生成的word文件的名称（可以给出完整的路径）.当你使用了$word->save()  
-方法后，这后面的任何输出都和word文件没有关系了，也就是说word的生成  
-工作就完成了。之后就和你平常使用php的方式一样拉。随便你输出什么东西，  
-都直接在浏览器里输出，而不会写到word里面去。  
-<p>这是本人想到的一个很有意思的方法，它的实现方法出人意料的简单，并且避免  
-了对windows环境的依赖。  
-<br>哈哈，很有意思吧？享受它吧！  
-<hr size=1>';
-        //以上内容会保存在WORD文件中
-        $this->save("/search/service/nginx/html/laravel/storage/app/uploads/data.doc");//保存word并且结束.
-//以下内容正常输出在页面文件中
-        header("Content-type:text/html;charset=utf-8");
-        echo 'data.doc生成成功，请到目录下查看<br>';
+        $b = $a === 10 ? : 0;
+        dump($b);
+    }
+
+    public function testHttp()
+    {
+        $file = 'data.json';
+        $file_path = app_path('Http/Controllers/' . $file);
+        $data = file_get_contents($file_path);
+        $client = new Client(['timeout' => 500]);
+        $option['form_params'] = [
+            'type' => 'b107',
+            'token' => 'd53cc2696364632b6ce92aaaaff8f8a8',
+            'query' => json_decode($data, true),
+        ];
+        $option['expect'] = 104857600;
+        ini_set("post_max_size", "64M");
+        $resp = $client->request('post', '127.0.0.1:3025/common/mq', $option);
+        $resp_content = $resp->getBody()->getContents();
+        var_dump($resp_content);
+        dd($resp);
+    }
+
+    public function testHttp2()
+    {
+        $file = 'data2.json';
+        $file_path = app_path('Http/Controllers/' . $file);
+        $data = file_get_contents($file_path);
+        $client = new Client(['timeout' => 500]);
+        $option['form_params'] = [
+            'type' => 'b107',
+            'token' => 'd53cc2696364632b6ce92aaaaff8f8a8',
+            'query' => $data,
+        ];
+        $option['expect'] = 104857600;
+        $resp = $client->request('post', '10.10.75.208:3025/common/mq', $option);
+        $resp_content = $resp->getBody()->getContents();
+        var_dump($resp_content);
+        dd($resp);
     }
 }
